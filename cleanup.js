@@ -217,6 +217,7 @@ function formatDate(dateStr) {
 
 function main() {
     try {
+        const startTime = Date.now();
         console.log('Starting CSV processing...');
         const currentDir = process.cwd();
         console.log(`Working directory: ${currentDir}`);
@@ -243,7 +244,9 @@ function main() {
             processCSV(path.join(currentDir, file), path.join(currentDir, flexFile));
         }
 
-        console.log('\nProcessing complete!');
+        const endTime = Date.now();
+        const processingTime = endTime - startTime;
+        console.log(`\nProcessing complete! Total time: ${processingTime} milliseconds`);
     } catch (error) {
         console.error('\nError occurred:');
         console.error(error.message);
