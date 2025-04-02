@@ -1,8 +1,16 @@
 #!/bin/bash
-echo "Installing dependencies..."
-npm install
 
-echo "Building executable..."
-npm run build
+# Create output directory if it doesn't exist
+mkdir -p build
 
-echo "Build complete! Executables are in the dist folder." 
+# Build for Windows (64-bit)
+echo "Building for Windows..."
+GOOS=windows GOARCH=amd64 go build -o build/flex-processor.exe main.go
+
+# Build for macOS (64-bit)
+echo "Building for macOS..."
+GOOS=darwin GOARCH=amd64 go build -o build/flex-processor_mac main.go
+
+echo "Build complete! Executables are in the 'build' directory:"
+echo "- Windows: flex-processor.exe"
+echo "- macOS: flex-processor_mac" 
